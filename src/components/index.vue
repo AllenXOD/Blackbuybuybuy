@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-    <!-- 手机数码/电脑办公/影音娱乐 -->
+    <!-- 手机数码/电脑办公/影音娱乐/服装类 -->
     <div class="section" v-for="(item,index) in goodsList" :key="index">
       <div class="main-tit">
         <h2>{{ item.catetitle }}</h2>
@@ -130,7 +130,8 @@
         <div class="wrap-box">
           <ul class="img-list">
             <li v-for="(it,index) in item.datas" :key="index">
-              <a href="#/site/goodsinfo/87" class>
+              <!-- <a href="#/site/goodsinfo/87" class> -->
+              <router-link :to="'/detail/'+it.artID">
                 <div class="img-box">
                   <img :src="it.img_url">
                 </div>
@@ -147,7 +148,8 @@
                     </span>
                   </p>
                 </div>
-              </a>
+              </router-link>
+              <!-- </a> -->
             </li>
           </ul>
         </div>

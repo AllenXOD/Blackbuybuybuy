@@ -10,6 +10,7 @@ import './assets/statics/site/css/style.css'
 // 组件
 import index from './components/index.vue'
 import shopCart from './components/shopCart.vue'
+import detail from './components/detail.vue'
 import jx from './components/jx.vue'
 
 const router = new VueRouter({
@@ -29,6 +30,10 @@ const router = new VueRouter({
     {
       path: '/shopCart',
       component: shopCart
+    },
+    {
+      path: '/detail/:id', // 传入商品 id
+      component: detail
     }
   ]
 })
