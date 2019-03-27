@@ -1,4 +1,5 @@
 <template>
+<!-- 页面结构 -->
   <div>
     <div class="section">
       <div class="location">
@@ -649,7 +650,7 @@
 
 <script>
 export default {
-    
+
 };
 </script>
 

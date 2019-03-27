@@ -23,12 +23,18 @@
               <a>退出</a>
               <strong>|</strong>
             </span>
-            <a href class>
+            <!-- <a href class>
               <i class="iconfont icon-cart"></i>购物车(
               <span id="shoppingCartCount">
                 <span>4</span>
               </span>)
-            </a>
+            </a>-->
+            <router-link to="/shopCart">
+              <i class="iconfont icon-cart"></i>购物车(
+              <span id="shoppingCartCount">
+                <span>4</span>
+              </span>)
+            </router-link>
           </div>
         </div>
       </div>
@@ -39,14 +45,20 @@
           <div id="menu2" class="nav-box menuhd">
             <ul>
               <li class="index">
-                <a href="#" class>
+                <!-- <a href="#" class>
                   <span class="out" style="top: 0px;">首页</span>
-                </a>
+                </a>-->
+                <router-link to="/">
+                  <span class="out" style="top: 0px;">首页</span>
+                </router-link>
               </li>
               <li class="news">
-                <a href="#" class>
+                <!-- <a href="#" class>
                   <span class="out" style="top: 0px;">每日精选</span>
-                </a>
+                </a>-->
+                <router-link to="/jx">
+                  <span class="out" style="top: 0px;">每日精选</span>
+                </router-link>
               </li>
               <li class="photo">
                 <a href="#" class>
