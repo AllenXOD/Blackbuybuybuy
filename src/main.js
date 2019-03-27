@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import 'axios'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
