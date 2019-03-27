@@ -4,11 +4,21 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 全局样式
-import style from './assets/statics/site/css/style.css'
+import './assets/statics/site/css/style.css'
+
+// 组件
+import index from './components/index.vue'
 
 const router = new VueRouter({
   routes: [
-
+    {
+      path: '/',
+      component: index
+    },
+    {
+      path: '/index',
+      component: index
+    }
   ]
 })
 

@@ -88,6 +88,8 @@
         </div>
       </div>
     </div>
+    <!-- 显示组件 -->
+    <router-view></router-view>
     <!-- 底部 -->
     <div class="footer">
       <div class="section">
