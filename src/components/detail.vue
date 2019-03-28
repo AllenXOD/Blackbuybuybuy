@@ -104,6 +104,7 @@
                           sucmsg=" "
                           data-type="*10-1000"
                           nullmsg="请填写评论内容！"
+                          v-model.trim="comment"
                         ></textarea>
                         <span class="Validform_checktip"></span>
                       </div>
@@ -114,6 +115,7 @@
                           type="submit"
                           value="提交评论"
                           class="submit"
+                          @click="postComment"
                         >
                         <span class="Validform_checktip"></span>
                       </div>
@@ -196,12 +198,13 @@ export default {
       index: 1,
       hotgoodslist: [],
       num1: 1,
-      imglist: []
+      imglist: [],
+      comment: ""
     };
   },
   methods: {
     handleChange(value) {
-      console.log(value);
+      // console.log(value);
     },
     getDetail() {
       this.$axios
@@ -214,6 +217,22 @@ export default {
           this.hotgoodslist = res.data.message.hotgoodslist;
           this.imglist = res.data.message.imglist;
         });
+    },
+    postComment() {
+      if (this.comment === "") {
+        this.$message.error("请写入内容!");
+      } else {
+        this.$axios
+          .post(`site/validate/comment/post/goods/${this.$route.params.id}`, {
+            commenttxt: this.comment
+          })
+          .then(res => {
+            if (res.data.status === 0) {
+              this.$message.success(res.data.message);
+              this.comment = "";
+            }
+          });
+      }
     }
   },
   // 侦听器 监听值改变, 可以避免重复点击
