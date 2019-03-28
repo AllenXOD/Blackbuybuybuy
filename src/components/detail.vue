@@ -40,35 +40,14 @@
                     <dt>购买数量</dt>
                     <dd>
                       <div class="stock-box">
-                        <div class="el-input-number el-input-number--small">
-                          <span role="button" class="el-input-number__decrease is-disabled">
-                            <i class="el-icon-minus"></i>
-                          </span>
-                          <span role="button" class="el-input-number__increase">
-                            <i class="el-icon-plus"></i>
-                          </span>
-                          <div class="el-input el-input--small">
-                            <!---->
-                            <input
-                              autocomplete="off"
-                              size="small"
-                              type="text"
-                              rows="2"
-                              max="60"
-                              min="1"
-                              validateevent="true"
-                              class="el-input__inner"
-                              role="spinbutton"
-                              aria-valuemax="60"
-                              aria-valuemin="1"
-                              aria-valuenow="1"
-                              aria-disabled="false"
-                            >
-                            <!---->
-                            <!---->
-                            <!---->
-                          </div>
-                        </div>
+                        <!-- 计数器 -->
+                        <el-input-number
+                          v-model="num1"
+                          @change="handleChange"
+                          :min="1"
+                          :max="10"
+                          label="描述文字"
+                        ></el-input-number>
                       </div>
                       <span class="stock-txt">
                         库存
@@ -93,7 +72,7 @@
                 class="tab-head"
                 style="position: static; top: 517px; width: 925px;"
               >
-              <!-- tab-bar -->
+                <!-- tab-bar -->
                 <ul>
                   <li>
                     <a @click="index=1" :class="{selected:index==1}" href="javascript:;">商品介绍</a>
@@ -183,9 +162,7 @@
                     <div class="img-box">
                       <!-- <a href="#/site/goodsinfo/90" class> -->
                       <router-link :to="'/detail/'+item.id">
-                        <img
-                          :src="item.img_url"
-                        >
+                        <img :src="item.img_url">
                       </router-link>
                       <!-- </a> -->
                     </div>
@@ -207,27 +184,38 @@
 <script>
 export default {
   name: "detail",
-  data(){
-      return{
-          goodsinfo: {},
-          index: 1,
-          hotgoodslist: []
-      }
+  data() {
+    return {
+      goodsinfo: {},
+      index: 1,
+      hotgoodslist: [],
+      num1: 1
+    };
+  },
+  methods: {
+    handleChange(value) {
+      console.log(value);
+    },
+    getDetail() {
+      this.$axios
+        // url id是router自动添加到data中, 可以直接使用
+        .get(`/site/goods/getgoodsinfo/${this.$route.params.id}`)
+        // 不能使用 function
+        .then(res => {
+          // console.log(res);
+          this.goodsinfo = res.data.message.goodsinfo;
+          this.hotgoodslist = res.data.message.hotgoodslist;
+        });
+    }
+  },
+  // 侦听器 监听值改变, 可以避免重复点击
+  watch: {
+    $route(value, oldvalue) {
+      this.getDetail();
+    }
   },
   created() {
-    this.$axios
-      // url id是router自动添加到data中, 可以直接使用
-      .get(
-        `/site/goods/getgoodsinfo/${
-          this.$route.params.id
-        }`
-      )
-      // 不能使用 function
-      .then(res => {
-        // console.log(res);
-        this.goodsinfo = res.data.message.goodsinfo;
-        this.hotgoodslist = res.data.message.hotgoodslist;
-      });
+    this.getDetail();
   }
 };
 </script>

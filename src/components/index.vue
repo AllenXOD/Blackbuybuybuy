@@ -159,11 +159,6 @@
 </template>
 
 <script>
-// ajax
-// import axios from "axios";
-// 格式化时间插件
-// import moment from "moment";
-
 export default {
   name: "index",
   // 数据
