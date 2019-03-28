@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app">
     <!-- 头部 -->
     <div class="header">
       <!-- 1.0 导航栏头部 -->
@@ -145,5 +145,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+// sass lang="scss" 和less的嵌套语法一模一样
+.app {
+  .header {
+    background-color: #000;
+  }
+  .footer {
+    background-color: skyblue;
+  }
+}
 </style>
