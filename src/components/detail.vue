@@ -125,37 +125,30 @@
                     <p
                       style="margin: 5px 0px 15px 69px; line-height: 42px; text-align: center; border: 1px solid rgb(247, 247, 247);"
                     >暂无评论，快来抢沙发吧！</p>
-                    <li>
+                    <li v-for="(item,index) in commentList" :key="index">
                       <div class="avatar-box">
                         <i class="iconfont icon-user-full"></i>
                       </div>
                       <div class="inner-box">
                         <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:58:59</span>
+                          <span>{{item.user_name}}</span>
+                          <span>{{item.add_time | globalFormatTime('YYYY-MM-DDTHH:mm:ss')}}</span>
                         </div>
-                        <p>testtesttest</p>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="avatar-box">
-                        <i class="iconfont icon-user-full"></i>
-                      </div>
-                      <div class="inner-box">
-                        <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:59:36</span>
-                        </div>
-                        <p>很清晰调动单很清晰调动单</p>
+                        <p>{{item.content}}</p>
                       </div>
                     </li>
                   </ul>
                   <div class="page-box" style="margin: 5px 0px 0px 62px;">
-                    <div id="pagination" class="digg">
-                      <span class="disabled">« 上一页</span>
-                      <span class="current">1</span>
-                      <span class="disabled">下一页 »</span>
-                    </div>
+                    <!-- 分页插件 -->
+                    <el-pagination
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="PageIndex"
+                      :page-sizes="[5, 10, 15, 20]"
+                      :page-size="pageSize"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalcount"
+                    ></el-pagination>
                   </div>
                 </div>
               </div>
@@ -199,7 +192,11 @@ export default {
       hotgoodslist: [],
       num1: 1,
       imglist: [],
-      comment: ""
+      comment: "",
+      PageIndex: 1,
+      pageSize: 10,
+      totalcount: 0,
+      commentList: []
     };
   },
   methods: {
@@ -218,6 +215,7 @@ export default {
           this.imglist = res.data.message.imglist;
         });
     },
+    // 发表评论
     postComment() {
       if (this.comment === "") {
         this.$message.error("请写入内容!");
@@ -233,6 +231,30 @@ export default {
             }
           });
       }
+    },
+    // 获取评论
+    getComment() {
+      this.$axios
+        .get(
+          `site/comment/getbypage/goods/${this.$route.params.id}?pageIndex=${
+            this.PageIndex
+          }&pageSize=${this.pageSize}`
+        )
+        .then(res => {
+          // console.log(res);
+          this.totalcount = res.data.totalcount;
+          this.commentList = res.data.message;
+        });
+    },
+    // 页容量改变
+    handleSizeChange(size){
+      this.pageSize = size;
+      this.getComment();
+    },
+    // 页码改变
+    handleCurrentChange(current){
+      this.PageIndex = current;
+      this.getComment();
     }
   },
   // 侦听器 监听值改变, 可以避免重复点击
@@ -243,6 +265,7 @@ export default {
   },
   created() {
     this.getDetail();
+    this.getComment();
   }
 };
 </script>
