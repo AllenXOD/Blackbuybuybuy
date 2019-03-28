@@ -44,57 +44,18 @@
           <!-- 轮播图 -->
           <div class="left-705">
             <div class="banner-img">
-              <div id="focus-box" class="focus-box">
-                <ul class="slides">
-                  <li
-                    class
-                    style="width: 100%;height:100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;"
-                  >
-                    <a href="/goods.html">
-                      <img
-                        style="width: 100%;height:100%;"
-                        src="http://39.108.135.214:8899/imgs/SJ4EgwosX0wTqvyAvhtFGT1w.jpg"
-                        draggable="false"
-                      >
-                    </a>
-                  </li>
-                  <li
-                    style="width: 100%;height:100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;"
-                    class="flex-active-slide"
-                  >
-                    <a href="/goods.html">
-                      <img
-                        style="width: 100%;height:100%;"
-                        src="http://39.108.135.214:8899/upload/201504/20/thumb_201504200314272543.jpg"
-                        draggable="false"
-                      >
-                    </a>
-                  </li>
-                </ul>
-                <ol class="flex-control-nav flex-control-paging">
-                  <li>
-                    <a class>1</a>
-                  </li>
-                  <li>
-                    <a class="flex-active">2</a>
-                  </li>
-                </ol>
-              </div>
+              <el-carousel height="341px">
+                <el-carousel-item v-for="(item,index) in sliderlist" :key="index">
+                  <router-link class="slider-a" :to="'/detail/'+item.id">
+                    <img  class="slider-img" :src="item.img_url">
+                  </router-link>
+                </el-carousel-item>
+              </el-carousel>
             </div>
           </div>
           <!-- 右侧排行 -->
           <div class="left-220">
             <ul class="side-img-list">
-              <!-- <li>
-                <div class="img-box">
-                  <label>1</label>
-                  <img src="http://39.108.135.214:8899/imgs/SJ4EgwosX0wTqvyAvhtFGT1w.jpg">
-                </div>
-                <div class="txt-box">
-                  <a href="/goods/show-98.html">骆驼男装2017秋季新款运动休闲纯色夹克青年宽松长袖针织开衫卫衣</a>
-                  <span>2017-09-26</span>
-                </div>
-              </li>-->
               <li v-for="(item,index) in toplist" :key="index">
                 <div class="img-box">
                   <label>{{ index+1 }}</label>
@@ -195,4 +156,14 @@ export default {
 </script>
 
 <style>
+.slider-a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.slider-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>
