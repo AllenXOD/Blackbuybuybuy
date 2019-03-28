@@ -122,9 +122,9 @@
                     </div>
                   </div>
                   <ul id="commentList" class="list-box">
-                    <p
+                    <!-- <p
                       style="margin: 5px 0px 15px 69px; line-height: 42px; text-align: center; border: 1px solid rgb(247, 247, 247);"
-                    >暂无评论，快来抢沙发吧！</p>
+                    >暂无评论，快来抢沙发吧！</p> -->
                     <li v-for="(item,index) in commentList" :key="index">
                       <div class="avatar-box">
                         <i class="iconfont icon-user-full"></i>
@@ -133,6 +133,7 @@
                         <div class="info">
                           <span>{{item.user_name}}</span>
                           <span>{{item.add_time | globalFormatTime('YYYY-MM-DDTHH:mm:ss')}}</span>
+                          <span>{{item.user_ip.substr(7)}}</span>
                         </div>
                         <p>{{item.content}}</p>
                       </div>
@@ -228,6 +229,7 @@ export default {
             if (res.data.status === 0) {
               this.$message.success(res.data.message);
               this.comment = "";
+              this.getComment();
             }
           });
       }
@@ -247,12 +249,12 @@ export default {
         });
     },
     // 页容量改变
-    handleSizeChange(size){
+    handleSizeChange(size) {
       this.pageSize = size;
       this.getComment();
     },
     // 页码改变
-    handleCurrentChange(current){
+    handleCurrentChange(current) {
       this.PageIndex = current;
       this.getComment();
     }

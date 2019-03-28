@@ -4,16 +4,16 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 // 导入ui插件
-import ElementUI from 'element-ui';
+import ElementUI from "element-ui";
 // 导入样式
-import 'element-ui/lib/theme-chalk/index.css';
+import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 
 // 全局样式
 import "./assets/statics/site/css/style.css";
 // 导入格式化时间插件moment.js
 import moment from "moment";
-// 全局过滤器 
+// 全局过滤器
 Vue.filter("globalFormatTime", function(value, fmtpl) {
   if (fmtpl) {
     return moment(value).format(fmtpl);
@@ -26,6 +26,10 @@ Vue.filter("globalFormatTime", function(value, fmtpl) {
 import index from "./components/index.vue";
 import shopCart from "./components/shopCart.vue";
 import detail from "./components/detail.vue";
+import userVip from "./components/userVip.vue";
+import userIndex from "./components/userIndex.vue";
+import userOrder from "./components/userOrder.vue";
+import userDetail from "./components/userDetail.vue";
 import axios from "axios";
 // 设置默认Url前缀
 axios.defaults.baseURL = "http://111.230.232.110:8899";
@@ -56,6 +60,24 @@ const router = new VueRouter({
     {
       path: "/detail/:id", // 传入商品 id
       component: detail
+    },
+    {
+      path: "/userVip",
+      component: userVip,
+      children: [
+        {
+          path: "userIndex",
+          component: userIndex
+        },
+        {
+          path: "userOrder",
+          component: userOrder
+        },
+        {
+          path: "userDetail",
+          component: userDetail
+        }
+      ]
     }
   ]
 });
