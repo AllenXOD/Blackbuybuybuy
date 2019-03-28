@@ -13,7 +13,13 @@
         <div class="wrap-box">
           <div class="left-925">
             <div class="goods-box clearfix">
-              <img :src="'http://111.230.232.110:8899/'+goodsinfo.img_url" class="pic-box">
+              <div class="pic-box">
+                <el-carousel>
+                  <el-carousel-item v-for="(item,index) in imglist" :key="index">
+                    <img :src="item.thumb_path">
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
               <div class="goods-spec">
                 <h1>{{goodsinfo.title}}</h1>
                 <p class="subtitle">{{goodsinfo.sub_title}}</p>
@@ -189,7 +195,8 @@ export default {
       goodsinfo: {},
       index: 1,
       hotgoodslist: [],
-      num1: 1
+      num1: 1,
+      imglist: []
     };
   },
   methods: {
@@ -205,6 +212,7 @@ export default {
           // console.log(res);
           this.goodsinfo = res.data.message.goodsinfo;
           this.hotgoodslist = res.data.message.hotgoodslist;
+          this.imglist = res.data.message.imglist;
         });
     }
   },
@@ -221,4 +229,21 @@ export default {
 </script>
 
 <style>
+.pic-box {
+  width: 395px;
+  height: 320px;
+}
+.pic-box .el-carousel {
+  width: 100%;
+  height: 100%;
+}
+.pic-box .el-carousel__container {
+  width: 100%;
+  height: 100%;
+}
+.pic-box .el-carousel__container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>
