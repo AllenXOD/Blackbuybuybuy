@@ -160,7 +160,7 @@
 
 <script>
 // ajax
-import axios from "axios";
+// import axios from "axios";
 // 格式化时间插件
 import moment from "moment";
 
@@ -177,9 +177,9 @@ export default {
   },
   // 钩子: 在创建app实例完成后触发
   created() {
-    axios
+    this.$axios
       // 获取商品首页顶部的 轮播图，置顶，分类导航数据
-      .get(`http://111.230.232.110:8899/site/goods/gettopdata/goods`)
+      .get(`/site/goods/gettopdata/goods`)
       .then(res => {
         // console.log(res);
         this.catelist = res.data.message.catelist;
@@ -188,9 +188,9 @@ export default {
         this.toplist = res.data.message.toplist;
       });
 
-    axios
+    this.$axios
       // 商品首页按照分类分组获取数据
-      .get(`http://111.230.232.110:8899/site/goods/getgoodsgroup`)
+      .get(`/site/goods/getgoodsgroup`)
       .then(res => {
         // console.log(res);
         this.goodsList = res.data.message;

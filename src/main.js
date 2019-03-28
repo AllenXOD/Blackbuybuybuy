@@ -11,6 +11,11 @@ import './assets/statics/site/css/style.css'
 import index from './components/index.vue'
 import shopCart from './components/shopCart.vue'
 import detail from './components/detail.vue'
+import axios from 'axios'
+// 设置默认Url前缀
+axios.defaults.baseURL = "http://111.230.232.110:8899";
+Vue.prototype.$axios = axios;
+
 import jx from './components/jx.vue'
 
 const router = new VueRouter({

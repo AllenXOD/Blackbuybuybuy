@@ -13,7 +13,7 @@
         <div class="wrap-box">
           <div class="left-925">
             <div class="goods-box clearfix">
-              <div class="pic-box"></div>
+              <img :src="'http://111.230.232.110:8899/'+goodsinfo.img_url" class="pic-box">
               <div class="goods-spec">
                 <h1>{{goodsinfo.title}}</h1>
                 <p class="subtitle">{{goodsinfo.sub_title}}</p>
@@ -293,7 +293,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "detail",
   data(){
@@ -303,10 +302,10 @@ export default {
       }
   },
   created() {
-    axios
+    this.$axios
       // url id是router自动添加到data中, 可以直接使用
       .get(
-        `http://111.230.232.110:8899/site/goods/getgoodsinfo/${
+        `/site/goods/getgoodsinfo/${
           this.$route.params.id
         }`
       )
