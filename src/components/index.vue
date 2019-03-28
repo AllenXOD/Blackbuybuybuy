@@ -102,7 +102,7 @@
                 </div>
                 <div class="txt-box">
                   <a href="/goods/show-98.html">{{ item.title }}</a>
-                  <span>{{ item.add_time | formatTime }}</span>
+                  <span>{{ item.add_time | globalFormatTime }}</span>
                 </div>
               </li>
             </ul>
@@ -162,7 +162,7 @@
 // ajax
 // import axios from "axios";
 // 格式化时间插件
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   name: "index",
@@ -195,13 +195,6 @@ export default {
         // console.log(res);
         this.goodsList = res.data.message;
       });
-  },
-  // 过滤器
-  filters: {
-    // toplist 时间格式化
-    formatTime(value) {
-      return moment(value).format("YYYY-MM-DD");
-    }
   }
 };
 </script>

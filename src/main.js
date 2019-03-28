@@ -6,6 +6,15 @@ Vue.use(VueRouter)
 
 // 全局样式
 import './assets/statics/site/css/style.css'
+// 全局过滤器
+import moment from 'moment'
+Vue.filter('globalFormatTime',function(value,fmtpl){
+  if(fmtpl) {
+    return moment(value).format(fmtpl)
+  }else{
+    return moment(value).format('YYYY-MM-DD')
+  }
+})
 
 // 组件
 import index from './components/index.vue'
